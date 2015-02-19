@@ -23,7 +23,7 @@ namespace FundsLibrary.InterviewTest.Web.UnitTests.Controllers
 			
 			Assert.That(result, Is.TypeOf<ViewResult>());
 			mock.Verify();
-			Assert.That((result as ViewResult).Model, Is.EqualTo(fundManagerModels));
+			Assert.That(((ViewResult)result).Model, Is.EqualTo(fundManagerModels));
 		}
 
 		[Test]
@@ -39,7 +39,7 @@ namespace FundsLibrary.InterviewTest.Web.UnitTests.Controllers
 
 			Assert.That(result, Is.TypeOf<ViewResult>());
 			mock.Verify();
-			Assert.That((result as ViewResult).Model, Is.EqualTo(fundManagerModel));
+			Assert.That(((ViewResult)result).Model, Is.EqualTo(fundManagerModel));
 		}
 	}
 }
