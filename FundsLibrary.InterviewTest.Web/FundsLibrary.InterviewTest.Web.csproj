@@ -43,6 +43,7 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -108,17 +109,14 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Client\RestClient.cs" />
-    <Compile Include="Client\ServiceClient.cs" />
+    <Compile Include="Repositories\HttpClientWrapper.cs" />
     <Compile Include="Controllers\FundManagerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Extensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\FundManagerModel.cs" />
-    <Compile Include="Models\FundManagerModelRepository.cs" />
-    <Compile Include="Models\Mappers\FromFundManagerModelMapper.cs" />
+    <Compile Include="Repositories\FundManagerModelRepository.cs" />
     <Compile Include="Models\Mappers\IMapper.cs" />
     <Compile Include="Models\Mappers\ToFundManagerModelMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

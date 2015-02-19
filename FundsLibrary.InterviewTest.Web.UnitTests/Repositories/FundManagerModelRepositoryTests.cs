@@ -1,34 +1,33 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FundsLibrary.InterviewTest.Common;
-using FundsLibrary.InterviewTest.Web.Client;
 using FundsLibrary.InterviewTest.Web.Models;
 using FundsLibrary.InterviewTest.Web.Models.Mappers;
+using FundsLibrary.InterviewTest.Web.Repositories;
 using Moq;
 using NUnit.Framework;
 
-namespace FundsLibrary.InterviewTest.Web.UnitTests.Models
+namespace FundsLibrary.InterviewTest.Web.UnitTests.Repositories
 {
 	public class FundManagerModelRepositoryTests
 	{
 		[Test]
 		public async Task ShouldGetAll()
 		{
-			var mockServiceClient = new Mock<IServiceClient>();
+			var mockServiceClient = new Mock<IHttpClientWrapper>();
 			var mockToFundManagerModelMapper = new Mock<IMapper<FundManager, FundManagerModel>>();
-			var mockFromFundManagerModelMapper = new Mock<IMapper<FundManagerModel, FundManager>>();
 			var fundManagers = new[] { new FundManager() }.AsEnumerable();
 			mockServiceClient
-				.Setup(m => m.GetAll())
+				.Setup(m => m.GetAndReadFromContentGetAsync<IEnumerable<FundManager>>("api/FundManager/"))
 				.Returns(Task.FromResult(fundManagers));
 			mockToFundManagerModelMapper
 				.Setup(m => m.Map(It.IsAny<FundManager>()))
 				.Returns(new FundManagerModel());
 			var repository = new FundManagerModelRepository(
 				mockServiceClient.Object,
-				mockToFundManagerModelMapper.Object,
-				mockFromFundManagerModelMapper.Object);
+				mockToFundManagerModelMapper.Object);
 
 			var result = await repository.GetAll();
 
@@ -40,13 +39,12 @@ namespace FundsLibrary.InterviewTest.Web.UnitTests.Models
 		[Test]
 		public async void ShouldGet()
 		{
-			var mockServiceClient = new Mock<IServiceClient>();
+			var mockServiceClient = new Mock<IHttpClientWrapper>();
 			var mockToFundManagerModelMapper = new Mock<IMapper<FundManager, FundManagerModel>>();
-			var mockFromFundManagerModelMapper = new Mock<IMapper<FundManagerModel, FundManager>>();
 			var fundManager = new FundManager();
 			var guid = Guid.NewGuid();
 			mockServiceClient
-				.Setup(m => m.GetById(guid))
+				.Setup(m => m.GetAndReadFromContentGetAsync<FundManager>("api/FundManager/" + guid))
 				.Returns(Task.FromResult(fundManager));
 			var fundManagerModel = new FundManagerModel();
 			mockToFundManagerModelMapper
@@ -54,8 +52,7 @@ namespace FundsLibrary.InterviewTest.Web.UnitTests.Models
 				.Returns(fundManagerModel);
 			var repository = new FundManagerModelRepository(
 				mockServiceClient.Object,
-				mockToFundManagerModelMapper.Object,
-				mockFromFundManagerModelMapper.Object);
+				mockToFundManagerModelMapper.Object);
 
 			var result = await repository.Get(guid);
 

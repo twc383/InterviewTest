@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using FundsLibrary.InterviewTest.Web.Controllers;
 using FundsLibrary.InterviewTest.Web.Models;
+using FundsLibrary.InterviewTest.Web.Repositories;
 using Moq;
 using NUnit.Framework;
 

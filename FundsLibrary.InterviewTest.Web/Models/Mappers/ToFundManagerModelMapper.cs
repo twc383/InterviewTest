@@ -6,7 +6,7 @@ namespace FundsLibrary.InterviewTest.Web.Models.Mappers
 	{
 		public FundManagerModel Map(FundManager obj)
 		{
-			return new FundManagerModel()
+			return new FundManagerModel
 			{
 				Id = obj.Id,
 				Biography = obj.Biography,

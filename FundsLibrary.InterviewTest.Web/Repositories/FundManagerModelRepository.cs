@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FundsLibrary.InterviewTest.Common;
-using FundsLibrary.InterviewTest.Web.Client;
+using FundsLibrary.InterviewTest.Web.Models;
 using FundsLibrary.InterviewTest.Web.Models.Mappers;
 
-namespace FundsLibrary.InterviewTest.Web.Models
+namespace FundsLibrary.InterviewTest.Web.Repositories
 {
 	public interface IFundManagerModelRepository
 	{
@@ -16,31 +16,29 @@ namespace FundsLibrary.InterviewTest.Web.Models
 
 	public class FundManagerModelRepository : IFundManagerModelRepository
 	{
-		private readonly IServiceClient _client;
+		private const string _serviceAppUrl = "http://localhost:50135/Service/";
+
+		private readonly IHttpClientWrapper _client;
 		private readonly IMapper<FundManager, FundManagerModel> _toModelMapper;
-		private readonly IMapper<FundManagerModel, FundManager> _fromModelMapper;
 
 		public FundManagerModelRepository(
-			IServiceClient client = null, 
-			IMapper<FundManager, FundManagerModel> toModelMapper = null, 
-			IMapper<FundManagerModel, FundManager> fromModelMapper = null)
+			IHttpClientWrapper client = null,
+			IMapper<FundManager, FundManagerModel> toModelMapper = null)
 		{
-			
-			_client = client ?? new ServiceClient();
+			_client = client ?? new HttpClientWrapper(_serviceAppUrl);
 			_toModelMapper = toModelMapper ?? new ToFundManagerModelMapper();
-			_fromModelMapper = fromModelMapper ?? new FromFundManagerModelMapper();
 		}
 
 		public async Task<IEnumerable<FundManagerModel>> GetAll()
 		{
-			var res = await	_client.GetAll();
-			return res.Select(s => _toModelMapper.Map(s));
+			var managers = await _client.GetAndReadFromContentGetAsync<IEnumerable<FundManager>>("api/FundManager/");
+			return managers.Select(s => _toModelMapper.Map(s));
 		}
 
 		public async Task<FundManagerModel> Get(Guid id)
 		{
-			var res = await _client.GetById(id);
-			return _toModelMapper.Map(res);
+			var manager = await _client.GetAndReadFromContentGetAsync<FundManager>("api/FundManager/" + id);
+			return _toModelMapper.Map(manager);
 		}
 	}
 }
