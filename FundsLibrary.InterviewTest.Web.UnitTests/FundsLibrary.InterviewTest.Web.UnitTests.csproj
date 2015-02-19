@@ -78,7 +78,7 @@
       <Project>{06F4DEE6-76A0-4BC2-B7A8-D25CDDC6D7F9}</Project>
       <Name>FundsLibrary.InterviewTest.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="D:\GitRepositories\InterviewTest\FundsLibrary.InterviewTest.Web\FundsLibrary.InterviewTest.Web.csproj">
+    <ProjectReference Include="..\FundsLibrary.InterviewTest.Web\FundsLibrary.InterviewTest.Web.csproj">
       <Project>{9C3D3A74-08FE-4208-A2D9-69968F9BB1C8}</Project>
       <Name>FundsLibrary.InterviewTest.Web</Name>
     </ProjectReference>
