@@ -21,10 +21,10 @@ namespace FundsLibrary.InterviewTest.Service.UnitTests.Controllers
 			var fundManager = new FundManager();
 			mock.Setup(m => m.GetBy(newGuid)).Returns(Task.FromResult(fundManager));
 			
-			var res = controller.Get(newGuid);
+			var result = controller.Get(newGuid);
 
 			mock.Verify();
-			Assert.That(await res, Is.EqualTo(fundManager));
+			Assert.That(await result, Is.EqualTo(fundManager));
 		}
 
 		[Test]
@@ -33,11 +33,11 @@ namespace FundsLibrary.InterviewTest.Service.UnitTests.Controllers
 			var mock = new Mock<IFundManagerRepository>();
 			var controller = new FundManagerController(mock.Object);
 			var valueFunction = new[] { new FundManager() }.AsQueryable();
-			mock.Setup(m => m.GetBy()).Returns(Task.FromResult(valueFunction));
+			mock.Setup(m => m.GetAll()).Returns(Task.FromResult(valueFunction));
 
-			var res = await controller.Get();
+			var result = await controller.Get();
 
-			Assert.That(res.Count(), Is.EqualTo(1));
+			Assert.That(result.Count(), Is.EqualTo(1));
 		}
 	}
 }

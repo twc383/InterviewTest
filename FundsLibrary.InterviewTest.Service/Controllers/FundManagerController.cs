@@ -1,41 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.OData;
 using FundsLibrary.InterviewTest.Common;
 using FundsLibrary.InterviewTest.Service.Repositories;
 
 namespace FundsLibrary.InterviewTest.Service.Controllers
 {
 	public class FundManagerController : ApiController
-    {
-	    private readonly IFundManagerRepository _repository;
+	{
+		private readonly IFundManagerRepository _repository;
 
+		// ReSharper disable once UnusedMember.Global
 		public FundManagerController()
-			:this(null)
-		{
-			
-		}
+			: this(new FundManagerMemoryDb())
+		{}
 
-	    public FundManagerController(IFundManagerRepository injectedRepository = null)
+		public FundManagerController(IFundManagerRepository injectedRepository)
 		{
-			_repository = injectedRepository ?? new FundManagerMemoryDb();
+			_repository = injectedRepository;
 		}
-
 
 		public async Task<IEnumerable<FundManager>> Get()
 		{
-			return (await _repository.GetBy()).ToArray();
+			return await _repository.GetAll();
 		}
 
 		// GET: api/FundManager/79c74c79-f993-454e-a7d4-53791f17f179
-        public async Task<FundManager> Get(Guid id)
-        {
+		public async Task<FundManager> Get(Guid id)
+		{
 			return await _repository.GetBy(id);
-        }
-    }
+		}
+	}
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Web;
 using FundsLibrary.InterviewTest.Common;
 
 namespace FundsLibrary.InterviewTest.Web.Models

@@ -5,12 +5,16 @@ using Newtonsoft.Json;
 
 namespace FundsLibrary.InterviewTest.Service
 {
+	/*
+	 * This is a convinience class to allow calling the API from a browser
+	 * without having to set the Accept header.
+	 */
 	public class BrowserJsonFormatter : JsonMediaTypeFormatter
 	{
 		public BrowserJsonFormatter()
 		{
-			this.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
-			this.SerializerSettings.Formatting = Formatting.Indented;
+			SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
+			SerializerSettings.Formatting = Formatting.Indented;
 		}
 
 		public override void SetDefaultContentHeaders(Type type, HttpContentHeaders headers, MediaTypeHeaderValue mediaType)

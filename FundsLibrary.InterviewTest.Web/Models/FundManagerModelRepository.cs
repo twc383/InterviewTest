@@ -26,7 +26,7 @@ namespace FundsLibrary.InterviewTest.Web.Models
 			IMapper<FundManagerModel, FundManager> fromModelMapper = null)
 		{
 			
-			this._client = client ?? new ServiceClient();
+			_client = client ?? new ServiceClient();
 			_toModelMapper = toModelMapper ?? new ToFundManagerModelMapper();
 			_fromModelMapper = fromModelMapper ?? new FromFundManagerModelMapper();
 		}
