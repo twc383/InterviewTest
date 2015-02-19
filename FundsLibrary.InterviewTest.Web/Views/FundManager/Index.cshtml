@@ -1,0 +1,14 @@
+﻿@model IEnumerable<FundsLibrary.InterviewTest.Web.Models.FundManagerModel>
+
+<div class="fund-managers">
+	<h1>Fund managers</h1>
+
+	@foreach(var fundManager in Model)
+	{
+		<div class="fund-manager">
+			<span class="glyphicon glyphicon-user"></span>
+			@Html.ActionLink(fundManager.Name, "Details", new { Id = fundManager.Id })
+		</div>
+	}
+</div>
+

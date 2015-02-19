@@ -13,6 +13,7 @@ namespace FundsLibrary.InterviewTest.Web
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+			FilterConfig.ReigsterGlobalFilters(GlobalFilters.Filters);
         }
     }
 }
