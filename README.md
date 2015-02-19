@@ -1,25 +1,25 @@
+FundsLibrary Interview Test
+===========================
 
-#FundsLibrary Interview Test
+Welcome to the FundsLibrary technical test!
 
-Here is a simple 2 tier application containing an MVC web front-end and a WebApi service. Currently a simple overview page for Fund Managers and a details page are available.
+This test is intended to be a simple test of coding ability. It should take up < 2 hours of your time.
 
-####Possible improvements (please pick 1)
-* Implement an add fund manager method end to end including use of the task based asynchronous pattern and MVC validation.
-* Implement an edit screen using async and MVC validation.
-* Implement logging
-* Implement paging/sorting
-* Implement search
-* Create a MVVM client side component to represent a read only view of a fund manager. 
-Include a calculated property for YearsManaged which can be computed from DateTime.Now - ManagedSince. 
-This may replace the detail view. (You are free to use a higher level language which can compile to javascript, 
-and any of the major javascript binding frameworks such as Knockout or Angular)
-* Set up some form of basic authentication
-* Write an external application which polls the service periodically and copies all new fund managers not already copied to a file.
+## Test Details
 
-####Minor improvements (please pick 1)
-* Improve look and feel with the aid of bootstrap
-* Implement bundling
-* Add not-found page when attempting to view a non-existent Id
-* Set up output caching for both tiers. Ensure appropriate caches are invalidated when necessary.
-* Add a new property to the model of any type you wish. Ensure that the application remains backwards compatible.
-* Refactor css to use a preprocessor (SASS or LESS)
+Here is a skeleton 2 tier application containing an MVC web front-end and a back-end WebApi service. The application is to display details of fund managers. Currently a simple overview page for fund managers and a details page are available.
+
+There are a number of [issues](https://github.com/FundsLibrary/InterviewTest/issues "open issues") with this GitHub repository. Navigate to: [issues](https://github.com/FundsLibrary/InterviewTest/issues) and pick one or more issues to complete.
+
+You are free to choose any number of issues and spend as much or as little time as you want on the test.
+
+## How to submit your answer
+
+The preferred option is for you to fork this repository & send a pull request that resolves the chosen issue(s).
+
+Alternatively if you don't have (or want) a GitHub account you can download this repository [https://github.com/FundsLibrary/InterviewTest/archive/master.zip](https://github.com/FundsLibrary/InterviewTest/archive/master.zip) and put the results somewhere public on the web (Dropbox, public Google Drive folder, public One Drive folder). Please note we cannot accept results via email, or FTP links.
+
+## Tooling
+
+You can download the community edition of Visual Studio from: [http://www.visualstudio.com/en-us/visual-studio-community-vs.aspx](http://www.visualstudio.com/en-us/visual-studio-community-vs.aspx)
+You can also complete this test using your favourite text editor and compile using csc.exe on Windows, or Mono [http://www.mono-project.com/](http://www.mono-project.com/) on other operating systems.
