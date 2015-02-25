@@ -9,35 +9,35 @@ using NUnit.Framework;
 
 namespace FundsLibrary.InterviewTest.Service.UnitTests.Controllers
 {
-	[TestFixture]
-	public class FundManagerControllerTests
-	{
-		[Test]
-		public async Task ShouldGet()
-		{
-			var mock = new Mock<IFundManagerRepository>();
-			var controller = new FundManagerController(mock.Object);
-			var newGuid = Guid.NewGuid();
-			var fundManager = new FundManager();
-			mock.Setup(m => m.GetBy(newGuid)).Returns(Task.FromResult(fundManager));
-			
-			var result = controller.Get(newGuid);
+    [TestFixture]
+    public class FundManagerControllerTests
+    {
+        [Test]
+        public async Task ShouldGet()
+        {
+            var mock = new Mock<IFundManagerRepository>();
+            var controller = new FundManagerController(mock.Object);
+            var newGuid = Guid.NewGuid();
+            var fundManager = new FundManager();
+            mock.Setup(m => m.GetBy(newGuid)).Returns(Task.FromResult(fundManager));
 
-			mock.Verify();
-			Assert.That(await result, Is.EqualTo(fundManager));
-		}
+            var result = controller.Get(newGuid);
 
-		[Test]
-		public async Task ShouldGetAll()
-		{
-			var mock = new Mock<IFundManagerRepository>();
-			var controller = new FundManagerController(mock.Object);
-			var valueFunction = new[] { new FundManager() }.AsQueryable();
-			mock.Setup(m => m.GetAll()).Returns(Task.FromResult(valueFunction));
+            mock.Verify();
+            Assert.That(await result, Is.EqualTo(fundManager));
+        }
 
-			var result = await controller.Get();
+        [Test]
+        public async Task ShouldGetAll()
+        {
+            var mock = new Mock<IFundManagerRepository>();
+            var controller = new FundManagerController(mock.Object);
+            var valueFunction = new[] { new FundManager() }.AsQueryable();
+            mock.Setup(m => m.GetAll()).Returns(Task.FromResult(valueFunction));
 
-			Assert.That(result.Count(), Is.EqualTo(1));
-		}
-	}
+            var result = await controller.Get();
+
+            Assert.That(result.Count(), Is.EqualTo(1));
+        }
+    }
 }

@@ -10,37 +10,37 @@ using NUnit.Framework;
 
 namespace FundsLibrary.InterviewTest.Web.UnitTests.Controllers
 {
-	public class FundManagerControllerTests
-	{
-		[Test]
-		public async void ShouldGetIndexPage()
-		{
-			var mock = new Mock<IFundManagerModelRepository>();
-			var fundManagerModels = new FundManagerModel[0].AsEnumerable();
-			mock.Setup(m => m.GetAll()).Returns(Task.FromResult(fundManagerModels));
-			var controller = new FundManagerController(mock.Object);
+    public class FundManagerControllerTests
+    {
+        [Test]
+        public async void ShouldGetIndexPage()
+        {
+            var mock = new Mock<IFundManagerModelRepository>();
+            var fundManagerModels = new FundManagerModel[0].AsEnumerable();
+            mock.Setup(m => m.GetAll()).Returns(Task.FromResult(fundManagerModels));
+            var controller = new FundManagerController(mock.Object);
 
-			var result = await controller.Index();
-			
-			Assert.That(result, Is.TypeOf<ViewResult>());
-			mock.Verify();
-			Assert.That(((ViewResult)result).Model, Is.EqualTo(fundManagerModels));
-		}
+            var result = await controller.Index();
 
-		[Test]
-		public async void ShouldGetDetailsPage()
-		{
-			var guid = Guid.NewGuid();
-			var mock = new Mock<IFundManagerModelRepository>();
-			var fundManagerModel = new FundManagerModel();
-			mock.Setup(m => m.Get(guid)).Returns(Task.FromResult(fundManagerModel));
-			var controller = new FundManagerController(mock.Object);
+            Assert.That(result, Is.TypeOf<ViewResult>());
+            mock.Verify();
+            Assert.That(((ViewResult)result).Model, Is.EqualTo(fundManagerModels));
+        }
 
-			var result = await controller.Details(guid);
+        [Test]
+        public async void ShouldGetDetailsPage()
+        {
+            var guid = Guid.NewGuid();
+            var mock = new Mock<IFundManagerModelRepository>();
+            var fundManagerModel = new FundManagerModel();
+            mock.Setup(m => m.Get(guid)).Returns(Task.FromResult(fundManagerModel));
+            var controller = new FundManagerController(mock.Object);
 
-			Assert.That(result, Is.TypeOf<ViewResult>());
-			mock.Verify();
-			Assert.That(((ViewResult)result).Model, Is.EqualTo(fundManagerModel));
-		}
-	}
+            var result = await controller.Details(guid);
+
+            Assert.That(result, Is.TypeOf<ViewResult>());
+            mock.Verify();
+            Assert.That(((ViewResult)result).Model, Is.EqualTo(fundManagerModel));
+        }
+    }
 }
