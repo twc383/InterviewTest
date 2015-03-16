@@ -10,8 +10,11 @@ namespace FundsLibrary.InterviewTest.Web.Repositories
 {
     public interface IFundManagerModelRepository
     {
+        Task<Boolean> Delete(Guid id);
         Task<IEnumerable<FundManagerModel>> GetAll();
         Task<FundManagerModel> Get(Guid id);
+        Task<Guid> Put(FundManagerModel content);
+        Task<Guid> Post(FundManagerModel content);
     }
 
     public class FundManagerModelRepository : IFundManagerModelRepository
@@ -39,6 +42,24 @@ namespace FundsLibrary.InterviewTest.Web.Repositories
         {
             var manager = await _client.GetAndReadFromContentGetAsync<FundManager>("api/FundManager/" + id);
             return _toModelMapper.Map(manager);
+        }
+
+        public async Task<Guid> Put(FundManagerModel content)
+        {
+            var manager = await _client.PutContentAndGetAsync<Guid>("api/FundManager/", content);
+            return manager;
+        }
+
+        public async Task<Guid> Post(FundManagerModel content)
+        {
+            var manager = await _client.PostContentAndGetAsync<Guid>("api/FundManager/", content);
+            return manager;
+        }
+
+        public async Task<Boolean> Delete(Guid id)
+        {
+            var manager = await _client.DeleteContentAndGetAsync<Boolean>(string.Format("api/FundManager/{0}", id));
+            return manager;
         }
     }
 }

@@ -6,7 +6,9 @@ namespace FundsLibrary.InterviewTest.Web.Models.Mappers
     {
         public FundManagerModel Map(FundManager obj)
         {
-            return new FundManagerModel
+            FundManagerModel mappedModel = null;
+            if (obj != null) { 
+            mappedModel = new FundManagerModel
             {
                 Id = obj.Id,
                 Biography = obj.Biography,
@@ -14,6 +16,8 @@ namespace FundsLibrary.InterviewTest.Web.Models.Mappers
                 ManagedSince = obj.ManagedSince,
                 Name = obj.Name
             };
+            }
+            return mappedModel;
         }
     }
 }

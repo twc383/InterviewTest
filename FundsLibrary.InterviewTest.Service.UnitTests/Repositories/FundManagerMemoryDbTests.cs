@@ -57,7 +57,7 @@ namespace FundsLibrary.InterviewTest.Service.UnitTests.Repositories
             var firstItem = (await repo.GetAll()).First();
 
             firstItem.Name = "NewName";
-            repo.Update(firstItem.Id, firstItem);
+            repo.Update(firstItem);
 
             Assert.That((await repo.GetBy(firstItem.Id)).Name, Is.EqualTo("NewName"));
         }

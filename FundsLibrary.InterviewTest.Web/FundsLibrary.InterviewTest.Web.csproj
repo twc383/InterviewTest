@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Repositories\HttpClientWrapper.cs" />
     <Compile Include="Controllers\FundManagerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -130,6 +131,9 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\FundManager\Details.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\FundManager\Add.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\FundManager\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

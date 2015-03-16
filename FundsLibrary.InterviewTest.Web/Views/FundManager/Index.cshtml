@@ -1,14 +1,34 @@
 ﻿@model IEnumerable<FundsLibrary.InterviewTest.Web.Models.FundManagerModel>
 
 <div class="fund-managers">
-    <h1>Fund managers</h1>
+    <h1>Fund Managers</h1>   
 
-    @foreach (var fundManager in Model)
-    {
-        <div class="fund-manager">
-            <span class="glyphicon glyphicon-user"></span>
-            @Html.ActionLink(fundManager.Name, "Details", new { Id = fundManager.Id })
-        </div>
-    }
+    <div class="row">
+        <table class="table-striped sm-col-4">
+            <thead>
+                <tr>
+                    <th width="40px;"></th>
+                    <th width="300px;">Fund Name</th>
+                    <th width="40px;"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var fundMgr in Model)
+                {
+                    <tr>
+                        <td><span class="glyphicon glyphicon-user"></span></td>
+                        <td>@Html.ActionLink(fundMgr.Name, "Details", new { Id = fundMgr.Id })</td>
+                        <td><a href="@Url.Action("Delete", new {Id = fundMgr.Id})" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></a></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <br/>
+    @Html.ActionLink("Add Fund Manager", "Add", null, new { @class = "btn btn-default" })
+
 </div>
+
 

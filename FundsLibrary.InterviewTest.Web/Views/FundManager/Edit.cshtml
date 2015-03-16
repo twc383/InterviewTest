@@ -1,0 +1,47 @@
+﻿@model FundsLibrary.InterviewTest.Web.Models.FundManagerModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h1>Edit</h1>
+
+@Html.ValidationSummary()
+@using (@Html.BeginForm("Edit", "FundManager", FormMethod.Post)){
+
+@Html.HiddenFor(model => model.Id)
+    
+<div class="fund-manager-details">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.EditorFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Biography)
+        </dt>
+
+        <dd>
+            @Html.EditorFor(model => model.Biography)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ManagedSince)
+        </dt>
+
+        <dd>
+            @Html.EditorFor(model => model.ManagedSince)
+        </dd>
+    </dl>
+</div>
+<div class="row">
+        @Html.ActionLink("Back", "Details", new { id = Model.Id }, new { @class = "btn btn-default col-sm-1" })
+        <span class="col-sm-4"></span>
+        <button type="submit" class="btn btn-success col-sm-1">Submit</button>
+</div>
+
+}
