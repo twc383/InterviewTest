@@ -16,31 +16,40 @@ namespace FundsLibrary.InterviewTest.Web.UnitTests.Controllers
         [Test]
         public async void ShouldGetIndexPage()
         {
+			//Arrange
             var mock = new Mock<IFundManagerModelRepository>();
             var fundManagerModels = new FundManagerModel[0].AsEnumerable();
-            mock.Setup(m => m.GetAll()).Returns(Task.FromResult(fundManagerModels));
+            mock.Setup(m => m.GetAll())
+				.Returns(Task.FromResult(fundManagerModels))
+				.Verifiable();
             var controller = new FundManagerController(mock.Object);
 
+			//Act
             var result = await controller.Index();
 
+			//Assert
             Assert.That(result, Is.TypeOf<ViewResult>());
-            mock.Verify();
             Assert.That(((ViewResult)result).Model, Is.EqualTo(fundManagerModels));
-        }
+			mock.Verify();
+		}
 
         [Test]
         public async void ShouldGetDetailsPage()
         {
+			//Arrange
             var guid = Guid.NewGuid();
             var mock = new Mock<IFundManagerModelRepository>();
             var fundManagerModel = new FundManagerModel();
-            mock.Setup(m => m.Get(guid)).Returns(Task.FromResult(fundManagerModel));
+            mock.Setup(m => m.Get(guid))
+				.Returns(Task.FromResult(fundManagerModel))
+				.Verifiable();
             var controller = new FundManagerController(mock.Object);
 
+			//Act
             var result = await controller.Details(guid);
 
+			//Assert
             Assert.That(result, Is.TypeOf<ViewResult>());
-            mock.Verify();
             Assert.That(((ViewResult)result).Model, Is.EqualTo(fundManagerModel));
         }
 

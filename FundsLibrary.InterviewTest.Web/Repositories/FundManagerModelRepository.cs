@@ -35,7 +35,7 @@ namespace FundsLibrary.InterviewTest.Web.Repositories
         public async Task<IEnumerable<FundManagerModel>> GetAll()
         {
             var managers = await _client.GetAndReadFromContentGetAsync<IEnumerable<FundManager>>("api/FundManager/");
-            return managers.Select(s => _toModelMapper.Map(s));
+	        return managers.Select(s => _toModelMapper.Map(s));
         }
 
         public async Task<FundManagerModel> Get(Guid id)

@@ -12,27 +12,34 @@ namespace FundsLibrary.InterviewTest.Service.UnitTests.Repositories
         [Test]
         public async Task ShouldGetItems()
         {
+			//Arrange
             var repo = new FundManagerMemoryDb();
 
+			//Act
             var result = await repo.GetAll();
 
-            //assert we have some data
+            //Assert
             Assert.That(result.Count(), Is.GreaterThan(3));
         }
 
         [Test]
         public async Task ShouldGetById()
         {
+			//Arrange
             var repo = new FundManagerMemoryDb();
-            var firstItem = (await repo.GetAll()).First();
+			var firstItem = (await repo.GetAll()).First();
 
-            var result = await repo.GetBy(firstItem.Id);
+			//Act
+			var result = await repo.GetBy(firstItem.Id);
+
+			//Assert
             Assert.That(result, Is.EqualTo(firstItem));
         }
 
         [Test]
         public async Task ShouldAddItem()
         {
+			//Arrange
             var repo = new FundManagerMemoryDb();
             var beforeCount = (await repo.GetAll()).Count();
             var fundManager = new FundManager()
@@ -43,8 +50,10 @@ namespace FundsLibrary.InterviewTest.Service.UnitTests.Repositories
                 ManagedSince = DateTime.Now.AddYears(-1)
             };
 
+			//Act
             repo.Create(fundManager);
 
+			//Assert
             Assert.That(fundManager.Id, Is.Not.EqualTo(Guid.Empty));
             var afterCount = (await repo.GetAll()).Count();
             Assert.That(afterCount, Is.EqualTo(beforeCount + 1));
@@ -53,25 +62,31 @@ namespace FundsLibrary.InterviewTest.Service.UnitTests.Repositories
         [Test]
         public async Task ShouldUpdateItem()
         {
+			//Arrange
             var repo = new FundManagerMemoryDb();
             var firstItem = (await repo.GetAll()).First();
+			firstItem.Name = "NewName";
 
-            firstItem.Name = "NewName";
-            repo.Update(firstItem);
+			//Act
+			repo.Update(firstItem);
 
+			//Assert
             Assert.That((await repo.GetBy(firstItem.Id)).Name, Is.EqualTo("NewName"));
         }
 
         [Test]
         public async Task ShouldRemoveItem()
         {
+			//Arrange
             var repo = new FundManagerMemoryDb();
             var fundManagers = (await repo.GetAll());
             var beforeCount = fundManagers.Count();
             var firstItem = fundManagers.First();
 
+			//Act
             repo.Delete(firstItem.Id);
 
+			//Assert
             var afterCount = (await repo.GetAll()).Count();
             Assert.That(afterCount, Is.EqualTo(beforeCount - 1));
         }

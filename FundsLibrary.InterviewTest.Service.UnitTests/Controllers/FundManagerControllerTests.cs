@@ -16,14 +16,19 @@ namespace FundsLibrary.InterviewTest.Service.UnitTests.Controllers
         [Test]
         public async Task ShouldGet()
         {
+			//Arrange
             var mock = new Mock<IFundManagerRepository>();
             var controller = new FundManagerController(mock.Object);
             var newGuid = Guid.NewGuid();
             var fundManager = new FundManager();
-            mock.Setup(m => m.GetBy(newGuid)).Returns(Task.FromResult(fundManager));
+            mock.Setup(m => m.GetBy(newGuid))
+				.Returns(Task.FromResult(fundManager))
+				.Verifiable();
 
+			//Act
             var result = controller.Get(newGuid);
 
+			//Assert
             mock.Verify();
             Assert.That(await result, Is.EqualTo(fundManager));
         }
@@ -31,13 +36,18 @@ namespace FundsLibrary.InterviewTest.Service.UnitTests.Controllers
         [Test]
         public async Task ShouldGetAll()
         {
+			//Arrange
             var mock = new Mock<IFundManagerRepository>();
             var controller = new FundManagerController(mock.Object);
             var valueFunction = new[] { new FundManager() }.AsQueryable();
-            mock.Setup(m => m.GetAll()).Returns(Task.FromResult(valueFunction));
+            mock.Setup(m => m.GetAll())
+				.Returns(Task.FromResult(valueFunction))
+				.Verifiable();
 
+			//Act
             var result = await controller.Get();
 
+			//Assert
             Assert.That(result.Count(), Is.EqualTo(1));
         }
     }
