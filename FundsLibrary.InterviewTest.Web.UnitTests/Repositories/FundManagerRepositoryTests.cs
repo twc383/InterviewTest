@@ -12,24 +12,24 @@ using NUnit.Framework;
 
 namespace FundsLibrary.InterviewTest.Web.UnitTests.Repositories
 {
-    public class FundManagerModelRepositoryTests
+    public class FundManagerRepositoryTests
     {
         [Test]
         public async Task ShouldGetAll()
         {
 			//Arrange
             var mockServiceClient = new Mock<IHttpClientWrapper>();
-            var mockToFundManagerModelMapper = new Mock<IMapper<FundManager, FundManagerModel>>();
-            var fundManagers = new[] { new FundManager() }.AsEnumerable();
+            var mockToFundManagerModelMapper = new Mock<IMapper<FundManagerDto, FundManager>>();
+            var fundManagers = new[] { new FundManagerDto() }.AsEnumerable();
             mockServiceClient
-                .Setup(m => m.GetAndReadFromContentGetAsync<IEnumerable<FundManager>>("api/FundManager/"))
+                .Setup(m => m.GetAndReadFromContentGetAsync<IEnumerable<FundManagerDto>>("api/FundManager/"))
                 .Returns(Task.FromResult(fundManagers))
 				.Verifiable();
             mockToFundManagerModelMapper
-                .Setup(m => m.Map(It.IsAny<FundManager>()))
-                .Returns(new FundManagerModel())
+                .Setup(m => m.Map(It.IsAny<FundManagerDto>()))
+                .Returns(new FundManager())
 				.Verifiable();
-            var repository = new FundManagerModelRepository(
+            var repository = new FundManagerRepository(
                 mockServiceClient.Object,
                 mockToFundManagerModelMapper.Object);
 
@@ -47,19 +47,19 @@ namespace FundsLibrary.InterviewTest.Web.UnitTests.Repositories
         {
 			//Arrange
             var mockServiceClient = new Mock<IHttpClientWrapper>();
-            var mockToFundManagerModelMapper = new Mock<IMapper<FundManager, FundManagerModel>>();
-            var fundManager = new FundManager();
+            var mockToFundManagerModelMapper = new Mock<IMapper<FundManagerDto, FundManager>>();
+            var fundManager = new FundManagerDto();
             var guid = Guid.NewGuid();
             mockServiceClient
-                .Setup(m => m.GetAndReadFromContentGetAsync<FundManager>("api/FundManager/" + guid))
+                .Setup(m => m.GetAndReadFromContentGetAsync<FundManagerDto>("api/FundManager/" + guid))
                 .Returns(Task.FromResult(fundManager))
 				.Verifiable();
-            var fundManagerModel = new FundManagerModel();
+            var fundManagerModel = new FundManager();
             mockToFundManagerModelMapper
-                .Setup(m => m.Map(It.IsAny<FundManager>()))
+                .Setup(m => m.Map(It.IsAny<FundManagerDto>()))
                 .Returns(fundManagerModel)
 				.Verifiable();
-            var repository = new FundManagerModelRepository(
+            var repository = new FundManagerRepository(
                 mockServiceClient.Object,
                 mockToFundManagerModelMapper.Object);
 

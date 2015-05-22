@@ -17,8 +17,8 @@ namespace FundsLibrary.InterviewTest.Web.UnitTests.Controllers
         public async void ShouldGetIndexPage()
         {
 			//Arrange
-            var mock = new Mock<IFundManagerModelRepository>();
-            var fundManagerModels = new FundManagerModel[0].AsEnumerable();
+            var mock = new Mock<IFundManagerRepository>();
+            var fundManagerModels = new FundManager[0].AsEnumerable();
             mock.Setup(m => m.GetAll())
 				.Returns(Task.FromResult(fundManagerModels))
 				.Verifiable();
@@ -38,8 +38,8 @@ namespace FundsLibrary.InterviewTest.Web.UnitTests.Controllers
         {
 			//Arrange
             var guid = Guid.NewGuid();
-            var mock = new Mock<IFundManagerModelRepository>();
-            var fundManagerModel = new FundManagerModel();
+            var mock = new Mock<IFundManagerRepository>();
+            var fundManagerModel = new FundManager();
             mock.Setup(m => m.Get(guid))
 				.Returns(Task.FromResult(fundManagerModel))
 				.Verifiable();
@@ -57,8 +57,8 @@ namespace FundsLibrary.InterviewTest.Web.UnitTests.Controllers
         public async void ShouldGetEditPage()
         {
             var guid = Guid.NewGuid();
-            var mock = new Mock<IFundManagerModelRepository>();
-            var fundManagerModel = new FundManagerModel();
+            var mock = new Mock<IFundManagerRepository>();
+            var fundManagerModel = new FundManager();
             mock.SetupAllProperties();
             mock.Setup(m => m.Get(guid)).Returns(Task.FromResult(fundManagerModel));
             var controller = new FundManagerController(mock.Object);
@@ -75,8 +75,8 @@ namespace FundsLibrary.InterviewTest.Web.UnitTests.Controllers
         {
             Guid? guid = null;
             Guid validGuid = Guid.NewGuid();
-            var mock = new Mock<IFundManagerModelRepository>();
-            var fundManagerModel = new FundManagerModel();
+            var mock = new Mock<IFundManagerRepository>();
+            var fundManagerModel = new FundManager();
             mock.SetupAllProperties();
             mock.Setup(m => m.Get(validGuid)).Returns(Task.FromResult(fundManagerModel));
             var controller = new FundManagerController(mock.Object);
@@ -92,7 +92,7 @@ namespace FundsLibrary.InterviewTest.Web.UnitTests.Controllers
         public async void ShouldGetIndexPageIfSuccessfulDelete()
         {
             Guid validGuid = Guid.NewGuid();
-            var mock = new Mock<IFundManagerModelRepository>();
+            var mock = new Mock<IFundManagerRepository>();
             mock.SetupAllProperties();
             mock.Setup(m => m.Delete(validGuid)).Returns(Task.FromResult(true));
             var controller = new FundManagerController(mock.Object);
@@ -108,8 +108,8 @@ namespace FundsLibrary.InterviewTest.Web.UnitTests.Controllers
         {
             Guid? guid = null;
             Guid validGuid = Guid.NewGuid();
-            var mock = new Mock<IFundManagerModelRepository>();
-            var fundManagerModel = new FundManagerModel();
+            var mock = new Mock<IFundManagerRepository>();
+            var fundManagerModel = new FundManager();
             mock.SetupAllProperties();
             mock.Setup(m => m.Get(validGuid)).Returns(Task.FromResult(fundManagerModel));
             var controller = new FundManagerController(mock.Object);

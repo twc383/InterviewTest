@@ -70,7 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\FundManagerControllerTests.cs" />
-    <Compile Include="Repositories\FundManagerModelRepositoryTests.cs" />
+    <Compile Include="Repositories\FundManagerRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

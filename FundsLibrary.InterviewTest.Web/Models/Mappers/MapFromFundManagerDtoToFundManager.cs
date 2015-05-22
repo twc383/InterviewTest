@@ -2,13 +2,11 @@ using FundsLibrary.InterviewTest.Common;
 
 namespace FundsLibrary.InterviewTest.Web.Models.Mappers
 {
-    public class ToFundManagerModelMapper : IMapper<FundManager, FundManagerModel>
+    public class MapFromFundManagerDtoToFundManager : IMapper<FundManagerDto, FundManager>
     {
-        public FundManagerModel Map(FundManager obj)
+        public FundManager Map(FundManagerDto obj)
         {
-            FundManagerModel mappedModel = null;
-            if (obj != null) { 
-            mappedModel = new FundManagerModel
+            return new FundManager
             {
                 Id = obj.Id,
                 Biography = obj.Biography,
@@ -16,8 +14,6 @@ namespace FundsLibrary.InterviewTest.Web.Models.Mappers
                 ManagedSince = obj.ManagedSince,
                 Name = obj.Name
             };
-            }
-            return mappedModel;
         }
     }
 }

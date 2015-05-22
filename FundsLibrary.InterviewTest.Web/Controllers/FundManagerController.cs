@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using FundsLibrary.InterviewTest.Web.Models;
 using FundsLibrary.InterviewTest.Web.Repositories;
 
 namespace FundsLibrary.InterviewTest.Web.Controllers
 {
     public class FundManagerController : Controller
     {
-        private readonly IFundManagerModelRepository _repository;
+        private readonly IFundManagerRepository _repository;
 
         // ReSharper disable once UnusedMember.Global
         public FundManagerController()
-            : this(new FundManagerModelRepository())
+            : this(new FundManagerRepository())
         {}
 
-        public FundManagerController(IFundManagerModelRepository repository)
+        public FundManagerController(IFundManagerRepository repository)
         {
             _repository = repository;
         }
@@ -45,7 +46,7 @@ namespace FundsLibrary.InterviewTest.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Add(Models.FundManagerModel newManager)
+        public async Task<ActionResult> Add(FundManager newManager)
         {
             if (ModelState.IsValid)
             {
@@ -75,15 +76,15 @@ namespace FundsLibrary.InterviewTest.Web.Controllers
         }
        
         [HttpPost]
-        public async Task<ActionResult> Edit(Models.FundManagerModel editManager) {
+        public async Task<ActionResult> Edit(FundManager editManager)
+        {
             if (ModelState.IsValid)
             {
                 var result = await _repository.Put(editManager);
                 return RedirectToAction("Details", new { id = result });
             }
-            else {
-                return View(editManager);
-            }
+
+            return View(editManager);
         }
     }
 }

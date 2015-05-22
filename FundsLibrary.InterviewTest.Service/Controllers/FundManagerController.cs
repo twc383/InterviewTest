@@ -26,22 +26,23 @@ namespace FundsLibrary.InterviewTest.Service.Controllers
             return await _repository.Delete(id);
         }
 
-        public async Task<IEnumerable<FundManager>> Get()
+        public async Task<IEnumerable<FundManagerDto>> Get()
         {
             return await _repository.GetAll();
         }
 
-        public async Task<FundManager> Get(Guid id)
+        // GET: api/FundManagerDto/79c74c79-f993-454e-a7d4-53791f17f179
+        public async Task<FundManagerDto> Get(Guid id)
         {
             return await _repository.GetBy(id);
         }
 
-        public async Task<Guid> Put(FundManager fundManager)
+        public async Task<Guid> Put(FundManagerDto fundManager)
         {
             return await _repository.Update(fundManager);
         }
 
-        public async Task<Guid> Post(FundManager fundManager)
+        public async Task<Guid> Post(FundManagerDto fundManager)
         {
             return await _repository.Create(fundManager);
         }

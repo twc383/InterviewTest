@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace FundsLibrary.InterviewTest.Web.Models
 {
-    public class FundManagerModel
+    public class FundManager
     {
         [DisplayName("Id")]
         public Guid Id { get; set; }

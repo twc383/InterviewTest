@@ -42,7 +42,7 @@ namespace FundsLibrary.InterviewTest.Service.UnitTests.Repositories
 			//Arrange
             var repo = new FundManagerMemoryDb();
             var beforeCount = (await repo.GetAll()).Count();
-            var fundManager = new FundManager()
+            var fundManager = new FundManagerDto()
             {
                 Name = "TestFundManager",
                 Biography = "test bio",

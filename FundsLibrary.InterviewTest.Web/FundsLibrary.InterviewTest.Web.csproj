@@ -120,10 +120,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\FundManagerModel.cs" />
-    <Compile Include="Repositories\FundManagerModelRepository.cs" />
+    <Compile Include="Models\FundManager.cs" />
+    <Compile Include="Repositories\FundManagerRepository.cs" />
     <Compile Include="Models\Mappers\IMapper.cs" />
-    <Compile Include="Models\Mappers\ToFundManagerModelMapper.cs" />
+    <Compile Include="Models\Mappers\MapFromFundManagerDtoToFundManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

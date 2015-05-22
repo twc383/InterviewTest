@@ -9,8 +9,8 @@ namespace FundsLibrary.InterviewTest.Web.Repositories
     public interface IHttpClientWrapper
     {
         Task<T> GetAndReadFromContentGetAsync<T>(string requestUri);
-        Task<T> PutContentAndGetAsync<T>(string requestUri, FundManagerModel content);
-        Task<T> PostContentAndGetAsync<T>(string requestUri, FundManagerModel content);
+        Task<T> PutContentAndGetAsync<T>(string requestUri, FundManager content);
+        Task<T> PostContentAndGetAsync<T>(string requestUri, FundManager content);
         Task<T> DeleteContentAndGetAsync<T>(string requestUri);
     }
 
@@ -43,7 +43,7 @@ namespace FundsLibrary.InterviewTest.Web.Repositories
             }
         }
 
-        public async Task<T> PutContentAndGetAsync<T>(string requestUri, FundManagerModel content)
+        public async Task<T> PutContentAndGetAsync<T>(string requestUri, FundManager content)
         {
             using (var client = new HttpClient())
             {
@@ -58,7 +58,7 @@ namespace FundsLibrary.InterviewTest.Web.Repositories
             }
         }
 
-        public async Task<T> PostContentAndGetAsync<T>(string requestUri, FundManagerModel content)
+        public async Task<T> PostContentAndGetAsync<T>(string requestUri, FundManager content)
         {
             using (var client = new HttpClient())
             {
