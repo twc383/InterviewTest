@@ -46,24 +46,25 @@ namespace FundsLibrary.InterviewTest.Service.Repositories
             return Task.FromResult(_fundManagers.Values.AsQueryable());
         }
 
-        public void Update(Guid id, FundManager fundManager)
+        public Task<Guid> Update(FundManager fundManager)
         {
-            _fundManagers[id] = fundManager;
+           _fundManagers[fundManager.Id] = fundManager;
+           return Task.FromResult(fundManager.Id);
         }
 
-        public void Delete(Guid id)
+        public Task<Boolean> Delete(Guid id)
         {
             FundManager value;
-            _fundManagers.TryRemove(id, out value);
+            var result = _fundManagers.TryRemove(id, out value);
+            return Task.FromResult(result);
         }
 
-        public Guid Create(FundManager fundManager)
+        public Task<Guid> Create(FundManager fundManager)
         {
             fundManager.Id = Guid.NewGuid();
             if (!_fundManagers.TryAdd(fundManager.Id, fundManager))
                 throw new Exception("Cannot add manager - another manager with the same ID already exists."); // Unlikely as it's as the key is a GUID.
-
-            return fundManager.Id;
+            return Task.FromResult(fundManager.Id);
         }
     }
 }

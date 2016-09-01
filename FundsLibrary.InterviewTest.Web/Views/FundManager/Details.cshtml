@@ -33,6 +33,13 @@
         </dd>
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Back", "Index")
-</p>
+<div class="row">
+    @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default col-sm-1" })
+    <span class="col-sm-4"></span>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-success col-sm-1" })
+</div>
+<br/>
+<div class="row">
+    <span class="col-sm-5"></span>
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger col-sm-1" })
+</div>

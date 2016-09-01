@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Funds Manager Error Page";
+}
+
+<section>
+    <headergroup>
+        <h2>Something unexpected has happened</h2>
+        <h4>@ViewBag.errorMessage</h4>
+    </headergroup>
+    <br />
+    @Html.ActionLink("Home Page", "Index", "FundManager", new { }, new { @class = "btn btn-success" })
+</section>
