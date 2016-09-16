@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading.Tasks;
@@ -48,8 +48,8 @@ namespace FundsLibrary.InterviewTest.Service.Repositories
 
         public Task<Guid> Update(FundManager fundManager)
         {
-           _fundManagers[fundManager.Id] = fundManager;
-           return Task.FromResult(fundManager.Id);
+            _fundManagers[fundManager.Id] = fundManager;
+            return Task.FromResult(fundManager.Id);
         }
 
         public Task<Boolean> Delete(Guid id)
