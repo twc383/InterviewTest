@@ -19,7 +19,17 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Fund Managers", "Index", "Fundmanager")</li>
+                <li>@Html.ActionLink("Fund Managers", "Index", "FundManager")</li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                @if (Session["LoggedUserGuid"] != null)
+                {
+                 <li>@Html.ActionLink("You are logged in as " + Session["LoggedUsername"], "AfterLogin", "User")</li>
+                 <li>@Html.ActionLink("Logout", "Logout", "User")</li>
+                } else {
+                <li>@Html.ActionLink("Register", "Register", "User")</li>
+                <li>@Html.ActionLink("Login", "Login", "User")</li>
+                }
             </ul>
         </div>
     </div>

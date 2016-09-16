@@ -1,4 +1,5 @@
-﻿@model IEnumerable<FundsLibrary.InterviewTest.Web.Models.FundManagerModel>
+﻿@model PagedList.IPagedList<FundsLibrary.InterviewTest.Web.Models.FundManagerModel>
+@using PagedList.Mvc;
 
 <div class="fund-managers">
     <h1>Fund Managers</h1>   
@@ -8,7 +9,10 @@
             <thead>
                 <tr>
                     <th width="40px;"></th>
-                    <th width="300px;">Fund Name</th>
+                    <th width="300px;">@Html.ActionLink("Fund Manager Name", "Index", new { sortOrder = "Name" })</th>
+                    <th width="300px;">@Html.ActionLink("Location", "Index", new { sortOrder = "Location" })</th>
+                    <th width="300px;">@Html.ActionLink("Biography", "Index", new { sortOrder = "Biography" })</th>
+                    <th width="300px;">@Html.ActionLink("Managed Since", "Index", new { sortOrder = "ManagedSince" })</th>
                     <th width="40px;"></th>
                 </tr>
             </thead>
@@ -19,12 +23,19 @@
                     <tr>
                         <td><span class="glyphicon glyphicon-user"></span></td>
                         <td>@Html.ActionLink(fundMgr.Name, "Details", new { Id = fundMgr.Id })</td>
+                        <td>@fundMgr.Location</td>
+                        <td>@fundMgr.Biography</td>
+                        <td>@fundMgr.ManagedSince</td>
                         <td><a href="@Url.Action("Delete", new {Id = fundMgr.Id})" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></a></td>
                     </tr>
                 }
-
             </tbody>
         </table>
+        <br/>
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort }))
     </div>
     <br/>
     @Html.ActionLink("Add Fund Manager", "Add", null, new { @class = "btn btn-default" })
