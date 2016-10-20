@@ -1,5 +1,0 @@
-C:\Users\jhbr3\Desktop\InterviewTest-master\FundsLibrary.InterviewTest.Common\bin\Debug\FundsLibrary.InterviewTest.Common.dll
-C:\Users\jhbr3\Desktop\InterviewTest-master\FundsLibrary.InterviewTest.Common\bin\Debug\FundsLibrary.InterviewTest.Common.pdb
-C:\Users\jhbr3\Desktop\InterviewTest-master\FundsLibrary.InterviewTest.Common\obj\Debug\FundsLibrary.InterviewTest.Common.dll
-C:\Users\jhbr3\Desktop\InterviewTest-master\FundsLibrary.InterviewTest.Common\obj\Debug\FundsLibrary.InterviewTest.Common.pdb
-C:\Users\jhbr3\Desktop\InterviewTest-master\FundsLibrary.InterviewTest.Common\obj\Debug\FundsLibrary.InterviewTest.Common.csprojResolveAssemblyReference.cache
