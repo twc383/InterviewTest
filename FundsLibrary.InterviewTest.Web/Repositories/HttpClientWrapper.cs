@@ -11,6 +11,7 @@ namespace FundsLibrary.InterviewTest.Web.Repositories
         Task<T> GetAndReadFromContentGetAsync<T>(string requestUri);
         Task<T> PutContentAndGetAsync<T>(string requestUri, FundManager content);
         Task<T> PostContentAndGetAsync<T>(string requestUri, FundManager content);
+        Task<T> PostContentAndGetAsync<T>(string requestUri, UserModel content);
         Task<T> DeleteContentAndGetAsync<T>(string requestUri);
     }
 
@@ -70,6 +71,21 @@ namespace FundsLibrary.InterviewTest.Web.Repositories
                 var response = await client.PostAsync(requestUri, contentString);
                 response.EnsureSuccessStatusCode();
                 return await response.Content.ReadAsAsync<T>(); 
+            }
+        }
+
+        public async Task<T> PostContentAndGetAsync<T>(string requestUri, UserModel content)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_serviceAppUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                var serialisedContent = Newtonsoft.Json.JsonConvert.SerializeObject(content);
+                StringContent contentString = new StringContent(serialisedContent, System.Text.Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(requestUri, contentString);
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsAsync<T>();
             }
         }
 

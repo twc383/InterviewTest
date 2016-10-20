@@ -3,6 +3,10 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using FundsLibrary.InterviewTest.Web.Models;
 using FundsLibrary.InterviewTest.Web.Repositories;
+using PagedList;
+using System.Collections.Generic;
+using System.Linq;
+using FundsLibrary.InterviewTest.Web.App_Start;
 
 namespace FundsLibrary.InterviewTest.Web.Controllers
 {
@@ -21,9 +25,28 @@ namespace FundsLibrary.InterviewTest.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string sortOrder = "" , int? page = 1)
         {
-            return View(await _repository.GetAll());
+            IEnumerable<Models.FundManagerModel> fundManagersList = await _repository.GetAll();
+            ViewBag.CurrentSort = sortOrder;
+
+            switch (sortOrder)
+            {
+                case "Name" : fundManagersList = fundManagersList.OrderBy(n => n.Name);
+                    break;
+                case "Location" : fundManagersList = fundManagersList.OrderBy(n => n.Location.ToString());
+                    break;
+                case "Biography" : fundManagersList = fundManagersList.OrderBy(n => n.Biography);
+                    break;
+                case "ManagedSince" : fundManagersList = fundManagersList.OrderBy(n => n.ManagedSince);
+                    break;
+                default:
+                    fundManagersList = fundManagersList.OrderByDescending(n => n.Name);
+                    break;
+            }
+            int pageNumber = (page ?? 1);
+            int pageSize = 3;
+            return View(fundManagersList.ToPagedList(pageNumber, pageSize));
         }
 
         [HttpGet]
@@ -39,12 +62,14 @@ namespace FundsLibrary.InterviewTest.Web.Controllers
             return RedirectToAction("Index", "Error", new { errorMessage = errorMessage });
         }
 
+        //[UserAuthorisation(Role = "Admin")]
         [HttpGet]
         public ViewResult Add()
         {
             return View();
         }
 
+        //[UserAuthorisation(Roles = "admin")]
         [HttpPost]
         public async Task<ActionResult> Add(FundManager newManager)
         {
