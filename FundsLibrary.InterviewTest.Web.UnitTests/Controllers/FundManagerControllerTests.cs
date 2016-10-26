@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using FundsLibrary.InterviewTest.Common;
 using FundsLibrary.InterviewTest.Web.Controllers;
-using FundsLibrary.InterviewTest.Web.Models;
 using FundsLibrary.InterviewTest.Web.Repositories;
 using Moq;
 using NUnit.Framework;
-using System.Web;
 
 namespace FundsLibrary.InterviewTest.Web.UnitTests.Controllers
 {
@@ -16,39 +15,39 @@ namespace FundsLibrary.InterviewTest.Web.UnitTests.Controllers
         [Test]
         public async void ShouldGetIndexPage()
         {
-			//Arrange
+            //Arrange
             var mock = new Mock<IFundManagerRepository>();
-            var fundManagerModels = new FundManager[0].AsEnumerable();
+            IEnumerable<FundManager> fundManagerModels = new FundManager[0];
             mock.Setup(m => m.GetAll())
-				.Returns(Task.FromResult(fundManagerModels))
-				.Verifiable();
+                .Returns(Task.FromResult(fundManagerModels))
+                .Verifiable();
             var controller = new FundManagerController(mock.Object);
 
-			//Act
+            //Act
             var result = await controller.Index();
 
-			//Assert
+            //Assert
             Assert.That(result, Is.TypeOf<ViewResult>());
             Assert.That(((ViewResult)result).Model, Is.EqualTo(fundManagerModels));
-			mock.Verify();
-		}
+            mock.Verify();
+        }
 
         [Test]
         public async void ShouldGetDetailsPage()
         {
-			//Arrange
+            //Arrange
             var guid = Guid.NewGuid();
             var mock = new Mock<IFundManagerRepository>();
             var fundManagerModel = new FundManager();
             mock.Setup(m => m.Get(guid))
-				.Returns(Task.FromResult(fundManagerModel))
-				.Verifiable();
+                .Returns(Task.FromResult(fundManagerModel))
+                .Verifiable();
             var controller = new FundManagerController(mock.Object);
 
-			//Act
+            //Act
             var result = await controller.Details(guid);
 
-			//Assert
+            //Assert
             Assert.That(result, Is.TypeOf<ViewResult>());
             Assert.That(((ViewResult)result).Model, Is.EqualTo(fundManagerModel));
         }
@@ -73,25 +72,23 @@ namespace FundsLibrary.InterviewTest.Web.UnitTests.Controllers
         [Test]
         public async void ShouldGetRedirectedToErrorFromEditPageIfNullGuid()
         {
-            Guid? guid = null;
-            Guid validGuid = Guid.NewGuid();
+            var validGuid = Guid.NewGuid();
             var mock = new Mock<IFundManagerRepository>();
             var fundManagerModel = new FundManager();
             mock.SetupAllProperties();
             mock.Setup(m => m.Get(validGuid)).Returns(Task.FromResult(fundManagerModel));
             var controller = new FundManagerController(mock.Object);
 
-            var result = await controller.Edit(guid);
+            var result = await controller.Edit((Guid?)null);
 
             Assert.That(result, Is.TypeOf<RedirectToRouteResult>());
             mock.Verify();
-
         }
 
         [Test]
         public async void ShouldGetIndexPageIfSuccessfulDelete()
         {
-            Guid validGuid = Guid.NewGuid();
+            var validGuid = Guid.NewGuid();
             var mock = new Mock<IFundManagerRepository>();
             mock.SetupAllProperties();
             mock.Setup(m => m.Delete(validGuid)).Returns(Task.FromResult(true));
@@ -101,24 +98,22 @@ namespace FundsLibrary.InterviewTest.Web.UnitTests.Controllers
 
             Assert.That(result, Is.TypeOf<RedirectToRouteResult>());
             mock.Verify();
-         }
+        }
 
         [Test]
         public async void ShouldGetRedirectedToErrorFromDeletePageIfNullGuid()
         {
-            Guid? guid = null;
-            Guid validGuid = Guid.NewGuid();
+            var validGuid = Guid.NewGuid();
             var mock = new Mock<IFundManagerRepository>();
             var fundManagerModel = new FundManager();
             mock.SetupAllProperties();
             mock.Setup(m => m.Get(validGuid)).Returns(Task.FromResult(fundManagerModel));
             var controller = new FundManagerController(mock.Object);
 
-            var result = await controller.Delete(guid);
+            var result = await controller.Delete(null);
 
             Assert.That(result, Is.TypeOf<RedirectToRouteResult>());
             mock.Verify();
-
         }
     }
 }

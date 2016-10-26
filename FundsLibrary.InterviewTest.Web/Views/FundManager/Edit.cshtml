@@ -1,4 +1,4 @@
-﻿@model FundsLibrary.InterviewTest.Web.Models.FundManagerModel
+﻿@model FundsLibrary.InterviewTest.Common.FundManager
 
 @{
     ViewBag.Title = "Edit";
@@ -7,7 +7,7 @@
 <h1>Edit</h1>
 
 @Html.ValidationSummary()
-@using (@Html.BeginForm("Edit", "FundManager", FormMethod.Post)){
+@using (Html.BeginForm("Edit", "FundManager", FormMethod.Post)){
 
 @Html.HiddenFor(model => model.Id)
     
@@ -34,7 +34,7 @@
         </dt>
 
         <dd>
-            @Html.EditorFor(model => model.ManagedSince)
+            @Html.EditorFor(model => model.ManagedSince, new { type = "date" })
         </dd>
     </dl>
 </div>

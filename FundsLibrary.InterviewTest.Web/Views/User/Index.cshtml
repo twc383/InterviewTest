@@ -1,9 +1,39 @@
-﻿@model FundsLibrary.InterviewTest.Web.Models.UserModel
+﻿@model IEnumerable<FundsLibrary.InterviewTest.Common.User>
 
 @{
-    ViewBag.Title = "Login";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "UserDetails";
 }
 
-<div class="fund-managers">
+<h2>User Details</h2>
+
+<div class="fund-manager-details">
+    <div class="row">
+        <table class="table-striped sm-col-4">
+            <thead>
+                <tr>
+                    <th width="40px;"></th>
+                    <th width="300px;">UserName</th>
+                    <th width="300px;">Email Address</th>
+                    <th width="300px;">Registered Since</th>
+                    <th width="300px;">Id</th>
+                    <th width="40px;"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td><span class="glyphicon glyphicon-user"></span></td>
+                        <td>@user.UserName</td>
+                        <td>@user.EmailAddress</td>
+                        <td>@user.RegisteredSince</td>
+                        <td>@user.Id</td>
+                        <td><a href="@Url.Action("Delete", new {Id = user.Id})" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
+

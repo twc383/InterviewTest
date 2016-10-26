@@ -1,5 +1,5 @@
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using FundsLibrary.InterviewTest.Common;
 
@@ -7,10 +7,10 @@ namespace FundsLibrary.InterviewTest.Service.Repositories
 {
     public interface IFundManagerRepository
     {
-        Task<FundManagerDto> GetBy(Guid id);
-        Task<IQueryable<FundManagerDto>> GetAll();
-        Task<Guid> Update(FundManagerDto fundManager);
-        Task<Guid> Create(FundManagerDto fundManager);
-        Task<Boolean> Delete(Guid id);
+        Task<FundManager> GetById(Guid id);
+        Task<IEnumerable<FundManager>> GetAll();
+        Task<Guid> Update(FundManager fundManager);
+        Task<Guid> Create(FundManager fundManager);
+        Task<bool> Delete(Guid id);
     }
 }

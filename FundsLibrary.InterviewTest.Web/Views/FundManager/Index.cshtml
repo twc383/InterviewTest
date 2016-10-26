@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<FundsLibrary.InterviewTest.Web.Models.FundManager>
+﻿@model PagedList.IPagedList<FundsLibrary.InterviewTest.Common.FundManager>
 @using PagedList.Mvc;
 
 <div class="fund-managers">
@@ -22,11 +22,16 @@
                 {
                     <tr>
                         <td><span class="glyphicon glyphicon-user"></span></td>
-                        <td>@Html.ActionLink(fundMgr.Name, "Details", new { Id = fundMgr.Id })</td>
+                        <td>@Html.ActionLink(fundMgr.Name, "Details", new { fundMgr.Id })</td>
                         <td>@fundMgr.Location</td>
                         <td>@fundMgr.Biography</td>
                         <td>@fundMgr.ManagedSince</td>
-                        <td><a href="@Url.Action("Delete", new {Id = fundMgr.Id})" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></a></td>
+                    <td>
+                        @using (Html.BeginForm("Delete", "FundManager", new { fundMgr.Id }))
+                        {
+                            <button class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></button>
+                        }
+                    </td>
                     </tr>
                 }
             </tbody>

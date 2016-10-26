@@ -2,7 +2,7 @@
 
 namespace FundsLibrary.InterviewTest.Common
 {
-    public class FundManagerDto
+    public class FundManager
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

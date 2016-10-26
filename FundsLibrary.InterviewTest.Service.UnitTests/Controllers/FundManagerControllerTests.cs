@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FundsLibrary.InterviewTest.Common;
@@ -6,7 +7,6 @@ using FundsLibrary.InterviewTest.Service.Controllers;
 using FundsLibrary.InterviewTest.Service.Repositories;
 using Moq;
 using NUnit.Framework;
-
 
 namespace FundsLibrary.InterviewTest.Service.UnitTests.Controllers
 {
@@ -16,19 +16,19 @@ namespace FundsLibrary.InterviewTest.Service.UnitTests.Controllers
         [Test]
         public async Task ShouldGet()
         {
-			//Arrange
+            //Arrange
             var mock = new Mock<IFundManagerRepository>();
             var controller = new FundManagerController(mock.Object);
             var newGuid = Guid.NewGuid();
-            var fundManager = new FundManagerDto();
-            mock.Setup(m => m.GetBy(newGuid))
-				.Returns(Task.FromResult(fundManager))
-				.Verifiable();
+            var fundManager = new FundManager();
+            mock.Setup(m => m.GetById(newGuid))
+                .Returns(Task.FromResult(fundManager))
+                .Verifiable();
 
-			//Act
+            //Act
             var result = controller.Get(newGuid);
 
-			//Assert
+            //Assert
             mock.Verify();
             Assert.That(await result, Is.EqualTo(fundManager));
         }
@@ -36,18 +36,18 @@ namespace FundsLibrary.InterviewTest.Service.UnitTests.Controllers
         [Test]
         public async Task ShouldGetAll()
         {
-			//Arrange
+            //Arrange
             var mock = new Mock<IFundManagerRepository>();
             var controller = new FundManagerController(mock.Object);
-            var valueFunction = new[] { new FundManagerDto() }.AsQueryable();
+            IEnumerable<FundManager> valueFunction = new[] { new FundManager() };
             mock.Setup(m => m.GetAll())
-				.Returns(Task.FromResult(valueFunction))
-				.Verifiable();
+                .Returns(Task.FromResult(valueFunction))
+                .Verifiable();
 
-			//Act
+            //Act
             var result = await controller.Get();
 
-			//Assert
+            //Assert
             Assert.That(result.Count(), Is.EqualTo(1));
         }
     }

@@ -4,8 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fund Manager Information</title>
-    <link href="~/Content/Site.css" rel="stylesheet"/>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet"/>
+    @Styles.Render("~/Content/css")
 </head>
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top">
@@ -21,16 +20,7 @@
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("Fund Managers", "Index", "FundManager")</li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                @if (Session["LoggedUserGuid"] != null)
-                {
-                 <li>@Html.ActionLink("You are logged in as " + Session["LoggedUsername"], "AfterLogin", "User")</li>
-                 <li>@Html.ActionLink("Logout", "Logout", "User")</li>
-                } else {
-                <li>@Html.ActionLink("Register", "Register", "User")</li>
-                <li>@Html.ActionLink("Login", "Login", "User")</li>
-                }
-            </ul>
+            @Html.Partial("_LoginPartial")
         </div>
     </div>
 </div>
@@ -41,10 +31,8 @@
     </footer>
 </div>
 
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>
-<script src="~/Scripts/knockout-2.0.0.js"></script>
-<script src="~/Scripts/knockout.mapping-latest.js"></script>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
 @RenderSection("scripts", required: false)
 </body>
 </html>

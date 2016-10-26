@@ -1,11 +1,14 @@
-﻿body {
+﻿body
+{
     padding-top: 50px;
     padding-bottom: 20px;
 }
 
 /* Set padding to keep content from hitting the edges */
-.body-content {
-	padding-top:20px;
+
+.body-content
+{
+    padding-top: 20px;
     padding-left: 15px;
     padding-right: 15px;
 }
@@ -13,19 +16,19 @@
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
-.dl-horizontal dt {
+
+.dl-horizontal dt
+{
     white-space: normal;
 }
 
-
 div.fund-managers div.fund-manager
 {
-	margin:4px;
-	padding:4px;
+    margin: 4px;
+    padding: 4px;
 }
-
 
 div.fund-manager-details dl dd
 {
-	margin-bottom: 20px;
+    margin-bottom: 20px;
 }

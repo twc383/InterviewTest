@@ -12,10 +12,10 @@ namespace FundsLibrary.InterviewTest.Service.UnitTests.Repositories
         [Test]
         public async Task ShouldGetItems()
         {
-			//Arrange
+            //Arrange
             var repo = new FundManagerMemoryDb();
 
-			//Act
+            //Act
             var result = await repo.GetAll();
 
             //Assert
@@ -25,24 +25,24 @@ namespace FundsLibrary.InterviewTest.Service.UnitTests.Repositories
         [Test]
         public async Task ShouldGetById()
         {
-			//Arrange
+            //Arrange
             var repo = new FundManagerMemoryDb();
-			var firstItem = (await repo.GetAll()).First();
+            var firstItem = (await repo.GetAll()).First();
 
-			//Act
-			var result = await repo.GetBy(firstItem.Id);
+            //Act
+            var result = await repo.GetById(firstItem.Id);
 
-			//Assert
+            //Assert
             Assert.That(result, Is.EqualTo(firstItem));
         }
 
         [Test]
         public async Task ShouldAddItem()
         {
-			//Arrange
+            //Arrange
             var repo = new FundManagerMemoryDb();
             var beforeCount = (await repo.GetAll()).Count();
-            var fundManager = new FundManagerDto()
+            var fundManager = new FundManager
             {
                 Name = "TestFundManager",
                 Biography = "test bio",
@@ -50,10 +50,10 @@ namespace FundsLibrary.InterviewTest.Service.UnitTests.Repositories
                 ManagedSince = DateTime.Now.AddYears(-1)
             };
 
-			//Act
-            repo.Create(fundManager);
+            //Act
+            await repo.Create(fundManager);
 
-			//Assert
+            //Assert
             Assert.That(fundManager.Id, Is.Not.EqualTo(Guid.Empty));
             var afterCount = (await repo.GetAll()).Count();
             Assert.That(afterCount, Is.EqualTo(beforeCount + 1));
@@ -62,31 +62,31 @@ namespace FundsLibrary.InterviewTest.Service.UnitTests.Repositories
         [Test]
         public async Task ShouldUpdateItem()
         {
-			//Arrange
+            //Arrange
             var repo = new FundManagerMemoryDb();
             var firstItem = (await repo.GetAll()).First();
-			firstItem.Name = "NewName";
+            firstItem.Name = "NewName";
 
-			//Act
-			repo.Update(firstItem);
+            //Act
+            await repo.Update(firstItem);
 
-			//Assert
-            Assert.That((await repo.GetBy(firstItem.Id)).Name, Is.EqualTo("NewName"));
+            //Assert
+            Assert.That((await repo.GetById(firstItem.Id)).Name, Is.EqualTo("NewName"));
         }
 
         [Test]
         public async Task ShouldRemoveItem()
         {
-			//Arrange
+            //Arrange
             var repo = new FundManagerMemoryDb();
-            var fundManagers = (await repo.GetAll());
+            var fundManagers = await repo.GetAll();
             var beforeCount = fundManagers.Count();
             var firstItem = fundManagers.First();
 
-			//Act
-            repo.Delete(firstItem.Id);
+            //Act
+            await repo.Delete(firstItem.Id);
 
-			//Assert
+            //Assert
             var afterCount = (await repo.GetAll()).Count();
             Assert.That(afterCount, Is.EqualTo(beforeCount - 1));
         }

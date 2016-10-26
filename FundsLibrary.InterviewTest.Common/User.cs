@@ -1,21 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using Microsoft.AspNet.Identity;
 
 namespace FundsLibrary.InterviewTest.Common
 {
-    public class User
+    public class User : IUser<Guid>
     {
         public Guid Id { get; set; }
-        public string username { get; set; }
-        public string emailAddress { get; set; }
-        public string password { get; set; }
-        public DateTime registeredSince { get; set; }
-        public role role { get; set; }
+        public string UserName { get; set; }
+        public string EmailAddress { get; set; }
+        public string PasswordHash { get; set; }
+        public DateTime RegisteredSince { get; set; }
+        public IReadOnlyCollection<Role> Roles { get; set; }
     }
-
-    public enum role
-    {
-        Admin,
-        ReadOnly
-    }
-    
 }

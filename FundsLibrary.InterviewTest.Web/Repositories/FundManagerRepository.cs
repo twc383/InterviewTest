@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using FundsLibrary.InterviewTest.Common;
-using FundsLibrary.InterviewTest.Web.Models;
-using FundsLibrary.InterviewTest.Web.Models.Mappers;
 
 namespace FundsLibrary.InterviewTest.Web.Repositories
 {
     public interface IFundManagerRepository
     {
-        Task<Boolean> Delete(Guid id);
+        Task Delete(Guid id);
         Task<IEnumerable<FundManager>> GetAll();
         Task<FundManager> Get(Guid id);
         Task<Guid> Put(FundManager content);
@@ -19,47 +16,36 @@ namespace FundsLibrary.InterviewTest.Web.Repositories
 
     public class FundManagerRepository : IFundManagerRepository
     {
-        private const string _serviceAppUrl = "http://localhost:50135/Service/";
-
         private readonly IHttpClientWrapper _client;
-        private readonly IMapper<FundManagerDto, FundManager> _toModelMapper;
 
-        public FundManagerRepository(
-            IHttpClientWrapper client = null,
-            IMapper<FundManagerDto, FundManager> toModelMapper = null)
+        public FundManagerRepository(IHttpClientWrapper client)
         {
-            _client = client ?? new HttpClientWrapper(_serviceAppUrl);
-            _toModelMapper = toModelMapper ?? new MapFromFundManagerDtoToFundManager();
+            _client = client;
         }
 
         public async Task<IEnumerable<FundManager>> GetAll()
         {
-            var managers = await _client.GetAndReadFromContentGetAsync<IEnumerable<FundManagerDto>>("api/FundManager/");
-	        return managers.Select(s => _toModelMapper.Map(s));
+            return await _client.GetAndReadFromContentGetAsync<IEnumerable<FundManager>>("api/FundManager/");
         }
 
         public async Task<FundManager> Get(Guid id)
         {
-            var manager = await _client.GetAndReadFromContentGetAsync<FundManagerDto>("api/FundManager/" + id);
-            return _toModelMapper.Map(manager);
+            return await _client.GetAndReadFromContentGetAsync<FundManager>("api/FundManager/" + id);
         }
 
         public async Task<Guid> Put(FundManager content)
         {
-            var manager = await _client.PutContentAndGetAsync<Guid>("api/FundManager/", content);
-            return manager;
+            return await _client.PutContentAndGetAsync<Guid, FundManager>("api/FundManager/", content);
         }
 
         public async Task<Guid> Post(FundManager content)
         {
-            var manager = await _client.PostContentAndGetAsync<Guid>("api/FundManager/", content);
-            return manager;
+            return await _client.PostContentAndGetAsync<Guid, FundManager>("api/FundManager/", content);
         }
 
-        public async Task<Boolean> Delete(Guid id)
+        public Task Delete(Guid id)
         {
-            var manager = await _client.DeleteContentAndGetAsync<Boolean>(string.Format("api/FundManager/{0}", id));
-            return manager;
+            return _client.DeleteContentAsync($"api/FundManager/{id}");
         }
     }
 }

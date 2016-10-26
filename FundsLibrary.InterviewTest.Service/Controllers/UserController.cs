@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using FundsLibrary.InterviewTest.Common;
 using FundsLibrary.InterviewTest.Service.Repositories;
-using System.Linq;
 
 namespace FundsLibrary.InterviewTest.Service.Controllers
 {
@@ -15,7 +14,7 @@ namespace FundsLibrary.InterviewTest.Service.Controllers
         // ReSharper disable once UnusedMember.Global
         public UserController()
             : this(new UserMemoryDb())
-        { }
+        {}
 
         public UserController(IUserRepository injectedRepository)
         {
@@ -32,14 +31,15 @@ namespace FundsLibrary.InterviewTest.Service.Controllers
             return await _repository.GetAll();
         }
 
+        [Route("api/User/{id:Guid}")]
         public async Task<User> Get(Guid id)
         {
-            return await _repository.GetBy(id);
+            return await _repository.GetById(id);
         }
 
-        public async Task<User> GetByUsername(String username)
+        public async Task<User> Get(string id)
         {
-            return await _repository.GetByUsername(username);
+            return await _repository.GetByUsername(id);
         }
     }
 }
