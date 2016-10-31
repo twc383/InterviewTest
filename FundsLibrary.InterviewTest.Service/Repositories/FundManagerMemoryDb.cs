@@ -20,13 +20,13 @@ namespace FundsLibrary.InterviewTest.Service.Repositories
             //fake data
             var items = new[]
             {
-                new FundManager { Id = Guid.Parse("83eed26a-d1e3-4e78-8d3d-c4c9b63eb548"), Name = "A fund manager", Biography = "some bio goes here", Location = Location.Amsterdam, ManagedSince = DateTime.Now.AddYears(-3) },
-                new FundManager { Id = Guid.Parse("11a12c9f-417f-4225-ba33-d05ce638b457"), Name = "Another fund manager", Biography = "some bio goes here", Location = Location.Frankfurt, ManagedSince = DateTime.Now.AddYears(-1) },
-                new FundManager { Id = Guid.Parse("e5ada48d-bf76-4290-8e8a-c33b39e04d5c"), Name = "A third fund manager", Biography = "some bio goes here", Location = Location.Luxembourg, ManagedSince = DateTime.Now.AddYears(-4) },
-                new FundManager { Id = Guid.Parse("b44aa473-3d20-4bc1-b234-7d12dd19f233"), Name = "A fourth fund manager", Biography = "some bio goes here", Location = Location.London, ManagedSince = DateTime.Now.AddYears(-2) },
-                new FundManager { Id = Guid.Parse("317065b3-b366-43ae-8f12-2a29c60d451d"), Name = "A fifth fund manager", Biography = "some bio goes here", Location = Location.NewYork, ManagedSince = DateTime.Now.AddYears(-5) },
-                new FundManager { Id = Guid.Parse("4d335f80-de41-4bce-9733-625deca0704f"), Name = "A sixth fund manager", Biography = "some bio goes here", Location = Location.Zurich, ManagedSince = DateTime.Now.AddYears(-7) },
-                new FundManager { Id = Guid.Parse("11575c63-5cbb-4844-8c2c-bada70bf0305"), Name = "A seventh fund manager", Biography = "some bio goes here", Location = Location.London, ManagedSince = DateTime.Now.AddYears(-2) }
+                new FundManager { Id = Guid.Parse("bf9e5061-37d2-49f1-9b9b-212c94a3e3ae"), Name = "Sanjiv Duggal", Biography = "some bio goes here", Location = Location.Amsterdam, ManagedSince = DateTime.Now.AddYears(-3) },
+                new FundManager { Id = Guid.Parse("f67e8867-8e7b-41ee-81e9-dc75e3e32742"), Name = "Mitul Patel", Biography = "some bio goes here", Location = Location.Frankfurt, ManagedSince = DateTime.Now.AddYears(-1) },
+                new FundManager { Id = Guid.Parse("b759ce77-f469-4884-bcb5-efeaeec11872"), Name = "Iain Campbell", Biography = "some bio goes here", Location = Location.Luxembourg, ManagedSince = DateTime.Now.AddYears(-4) },
+                new FundManager { Id = Guid.Parse("2714c37a-4d16-422e-82ed-e3f0ff62d931"), Name = "James Donald", Biography = "some bio goes here", Location = Location.London, ManagedSince = DateTime.Now.AddYears(-2) },
+                new FundManager { Id = Guid.Parse("a4847d2b-3c18-4637-96c7-508f241fa45d"), Name = "Andrew Wickham", Biography = "some bio goes here", Location = Location.NewYork, ManagedSince = DateTime.Now.AddYears(-5) },
+                new FundManager { Id = Guid.Parse("808069a8-1949-4909-a662-7f1af0fcfbc3"), Name = "Steve Land", Biography = "some bio goes here", Location = Location.Zurich, ManagedSince = DateTime.Now.AddYears(-7) },
+                new FundManager { Id = Guid.Parse("0ee5458d-7d0d-46b8-8043-3215e67c0aa0"), Name = "Frederick Fromm", Biography = "some bio goes here", Location = Location.London, ManagedSince = DateTime.Now.AddYears(-2) }
             };
 
             foreach (var fundManager in items)
