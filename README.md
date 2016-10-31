@@ -1,9 +1,9 @@
 FundsLibrary Interview Test
 ===========================
 
-Welcome to the FundsLibrary technical test!
+Welcome to the FundsLibrary developer test!
 
-This test is intended to be a simple test of coding ability. You are welcome to spend as much or as little time on it as you want.
+This test is intended to be a simple test of coding ability. You are welcome to spend as much or as little time on it as you want. 
 
 ## Test Details
 
@@ -18,6 +18,32 @@ The external API is an OData endpoint that allows you to search for securities (
 To connect you will need to supply an API key as an HTTP header in the request. You can use the API key "ZNMI5P30EXUXV1ULNEAQ" for the purposes of the test. The key should be sent in the Authorization header as a bearer token as follows:
 
     Authorization: Bearer ZNMI5P30EXUXV1ULNEAQ
+
+A complete request and response looks like:
+
+Request:
+
+	GET https://www.fundslibrary.co.uk/FundsLibrary.DataApi.WebApi/Securities HTTP/1.1
+	Host: www.fundslibrary.co.uk
+	Authorization: Bearer ZNMI5P30EXUXV1ULNEAQ
+
+Response:
+
+	HTTP/1.1 200 OK
+	Cache-Control: private
+	Content-Length: 97968
+	Content-Type: application/json; odata.metadata=minimal; odata.streaming=true
+	OData-Version: 4.0
+	X-Content-Type-Options: nosniff
+	X-XSS-Protection: 1; mode=block
+	Date: Mon, 31 Oct 2016 11:33:44 GMT
+	
+	{
+	  "@odata.context":"https://www.fundslibrary.co.uk/FundsLibrary.DataApi.WebApi/$metadata#Securities",
+	  "value":[
+	    {
+
+You can also try out the API in a browser by navigating to [https://www.fundslibrary.co.uk/FundsLibrary.DataApi.WebApi/Securities](https://www.fundslibrary.co.uk/FundsLibrary.DataApi.WebApi/Securities) and using "Interview Test" as the username and "ZNMI5P30EXUXV1ULNEAQ" as the password.
 
 ## The Challenge
 
@@ -57,5 +83,6 @@ Alternatively if you don't have (or want) a GitHub account you can download this
 
 ## Tooling
 
-You can download the community edition of Visual Studio from: [http://www.visualstudio.com/en-us/visual-studio-community-vs.aspx](http://www.visualstudio.com/en-us/visual-studio-community-vs.aspx)
+You can download the community edition of Visual Studio from: [http://www.visualstudio.com/en-us/visual-studio-community-vs.aspx](http://www.visualstudio.com/en-us/visual-studio-community-vs.aspx).
+
 You can also complete this test using your favourite text editor and compile using csc.exe on Windows, or Mono [http://www.mono-project.com/](http://www.mono-project.com/) on other operating systems.
