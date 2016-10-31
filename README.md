@@ -3,11 +3,11 @@ FundsLibrary Interview Test
 
 Welcome to the FundsLibrary developer test!
 
-This test is intended to be a simple test of coding ability. You are welcome to spend as much or as little time on it as you want. 
+This test is intended to be a simple test of coding ability. You are welcome to spend as much or as little time on it as you want. If you have any problems you can create an issue to ask a question by going to: [https://github.com/FundsLibrary/InterviewTest/issues/new](https://github.com/FundsLibrary/InterviewTest/issues/new).
 
 ## Test Details
 
-This repository contains a skeleton 2 tier application containing an MVC web front-end and a back-end WebApi service. The purpose of the application is to display details of fund managers. Currently a simple overview page for fund managers and a details page are available.
+This repository contains a skeleton 2 tier application containing an MVC web front-end and a back-end WebApi service. The purpose of the application is to display details of fund managers.
 
 The current challenge is to integrate this application with an external web service hosted at [https://www.fundslibrary.co.uk/FundsLibrary.DataApi.WebApi/](https://www.fundslibrary.co.uk/FundsLibrary.DataApi.WebApi/).
 
@@ -43,7 +43,7 @@ Response:
 	  "value":[
 	    {
 
-You can also try out the API in a browser by navigating to [https://www.fundslibrary.co.uk/FundsLibrary.DataApi.WebApi/Securities](https://www.fundslibrary.co.uk/FundsLibrary.DataApi.WebApi/Securities) and using "Interview Test" as the username and "ZNMI5P30EXUXV1ULNEAQ" as the password.
+You can also try out the API in a browser by navigating to [https://www.fundslibrary.co.uk/FundsLibrary.DataApi.WebApi/Securities](https://www.fundslibrary.co.uk/FundsLibrary.DataApi.WebApi/Securities) and using "Interview Test" as the username and "ZNMI5P30EXUXV1ULNEAQ" as the password. Note that the API will return either XML or JSON based on what your browser sends in the Accept header (IE requests JSON. Chrome and FireFox request XML).
 
 ## The Challenge
 
