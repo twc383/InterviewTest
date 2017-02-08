@@ -1,0 +1,6 @@
+Have added method to the FundsManager class to search for their managed funds.
+Unable to parse the json returned by my API request so have had to enter dummy data.
+
+Have included commented out code of how I might work through the problem if I could have got the json data into a more usable format.
+
+Have modified the details view to call the new GetManagedSecurities method of the FundManager class and then iterate over the returned list to display the managed fund names and base currencies.
